@@ -13,10 +13,10 @@ def merge(a, p, r, q):
 			j += 1
 	
 	if i<=r:
-		sorted_a = sorted_a + a[i:r+1]
+		sorted_a += a[i:r+1]
 	
 	if j<=q:
-		sorted_a = sorted_a + a[j:q+1]
+		sorted_a += a[j:q+1]
 
 	a[p:q+1] = sorted_a
 	return a
@@ -29,6 +29,5 @@ def merge_sort(a, p, q):
 		merge(a, p, r, q)
 	return a
 
-a = [int(1000*random.random()) for i in xrange(20000000)]
+a = [int(1000000*random.random()) for i in xrange(20000000)]
 merge_sort(a, 0, len(a)-1)
-print a

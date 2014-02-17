@@ -35,7 +35,7 @@ def merge_sort a, p, q
 end
 
 a = (1..20000000).to_a.shuffle
-puts a.to_s
+puts 'done'
 
-merge_sort a, 0, a.length-1
-puts a.to_s
+#merge_sort a, 0, a.length-1
+#puts 'done'
