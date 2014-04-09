@@ -1,12 +1,25 @@
+import time
 from random import random
+
+def binary_search(a, v, start, end):
+	if end < start:
+		return start
+
+	t = (start+end) // 2
+	if a[t] == v:
+		return t
+	elif v < a[t]:
+		end = t-1
+	else:
+		start = t+1
+
+	return binary_search(a, v, start, end)
 
 def insertion_sort(a, p, q):
 	for i in range(p+1, q+1):
-		j = p
-		while j < i and a[j] < a[i]:
-			j += 1
+		j = binary_search(a, a[i], p, i-1)
 
-		if j != i:
+		if j < i:
 			t = a[i]
 			a[j+1:i+1] = a[j:i]
 			a[j] = t
@@ -32,6 +45,7 @@ def merge(a, p, r, q):
 
 	a[p:q+1] = sorted_a
 
+
 def merge_sort(a, p, q, k):
 	if (q-p+1) <= k:
 		insertion_sort(a, p, q)
@@ -41,7 +55,18 @@ def merge_sort(a, p, q, k):
 		merge_sort(a, r+1, q, k)
 		merge(a, p, r, q)
 
-a = [1000 * random() for x in range(10000)]
-b = sorted(a)
-merge_sort(a, 0, len(a)-1, 10)
-assert b == a
+def test(magnitude):
+	k = 15
+	a = [int(magnitude * random()) for x in range(magnitude)]
+	#a.sort()
+	insertion_sort(a, 0, len(a)-1)
+	merge_sort(a, 0, len(a)-1, k)
+	b = sorted(a)
+	assert a == b, a
+
+t = time.clock()
+tests = 1
+magnitude = 100000
+for i in range(tests):
+	test(magnitude)
+print("Completed %d tests of size %d in %d seconds" % (tests, magnitude, time.clock()-t))
