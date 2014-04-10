@@ -15,9 +15,9 @@ def merge_calculate_inversions(a, p, r, q):
 			i += 1
 
 	if i <= r:
-		sorted_a.extend(a[i:r+1])
+		sorted_a += a[i:r+1]
 	elif j <= q:
-		sorted_a.extend(a[j:q+1])
+		sorted_a += a[j:q+1]
 
 	a[p:q+1] = sorted_a
 	
