@@ -31,8 +31,8 @@ def quicksort(a, p, q):
     quicksort(a, p, j-1)
     quicksort(a, j+1, q)
 
-def generate_random_array(n, m):
-    return list(random.randint(0, m) for x in range(n))
+def generate_random_array(n, m, p=0):
+    return list(random.randint(p, m) for x in range(n))
 
 if __name__ == '__main__':
     for i in range(1000):

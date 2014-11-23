@@ -24,8 +24,8 @@ def merge(a, p, r, q):
 def merge_sort(a, p, q):
 	if  p<q:
 		r = (p+q)/2
-		merge_sort(a, p, r)
-		merge_sort(a, r+1, q)
+		merge_sort(a, p, r-1)
+		merge_sort(a, r, q)
 		merge(a, p, r, q)
 	return a
 
