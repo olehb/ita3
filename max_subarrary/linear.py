@@ -29,7 +29,15 @@ def generate_random_array(n, m, p=0):
     return list(random.randint(p, m) for x in range(n))
 
 if __name__ == '__main__':
-    a = generate_random_array(5, 100, -100)
-    print(a)
+    import cProfile, pstats, StringIO
+    pr = cProfile.Profile()
+    a = generate_random_array(1000000, 100, -100)
+    pr.enable()
     (l, h, m) = find_max_subarray(a)
+    pr.disable()
     print(a[l:h+1], m)
+    s = StringIO.StringIO()
+    sortby = 'cumulative'
+    ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+    ps.print_stats()
+    print(s.getvalue())
