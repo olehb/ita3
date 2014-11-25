@@ -1,6 +1,6 @@
 import cProfile, pstats, StringIO
 
-def print_stats(func, *args, **kwargs):
+def profile(func, *args, **kwargs):
     pr = cProfile.Profile()
     pr.enable()
     res = func(*args, **kwargs)
@@ -10,4 +10,4 @@ def print_stats(func, *args, **kwargs):
     ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
     ps.print_stats()
     print(s.getvalue())
-    return r
+    return res
