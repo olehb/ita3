@@ -1,5 +1,6 @@
 class Matrix:
     def __init__(self, a, n, m):
+        assert n*m == len(a)
         self.a = a
         self.n = n
         self.m = m
@@ -48,6 +49,12 @@ class Matrix:
     def multipleWithScalar(self, s):
         return Matrix([e*s for e in self], self.n, self.m)
 
+    def multipleWithMatrix(self, m):
+        (n1, m1) = m.getDimensions()
+        a = list(sum(self(i,x)*m(x,j) for x in range(self.m)) for i in range(self.n) for j in range(m1))
+        return Matrix(a, self.n, m1)
+
+
 if __name__ == '__main__':
     a = [1, 3, 2, 4, 5, 8]
     m = Matrix(a, 2, 3)
@@ -61,3 +68,10 @@ if __name__ == '__main__':
     assert m*2 == Matrix([2, 6, 4, 8, 10, 16], 2, 3), m*2
     assert 2*m == Matrix([2, 6, 4, 8, 10, 16], 2, 3), 2*m
     assert -m == Matrix([-1, -3, -2, -4, -5, -8], 2, 3), -m
+
+    m1 = Matrix([1, 3, 4, 5], 2, 2)
+    m2 = Matrix([2, 4, 6, 8, 10, 12, 14, 16], 2, 4)
+    m3 = Matrix([32, 40, 48, 56, 58, 76, 94, 112], 2, 4)
+
+    assert m1*m2 == m3, m1*m2
+
