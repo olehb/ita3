@@ -39,6 +39,9 @@ class Matrix:
         else:
             return self.multipleWithScalar(s)
 
+    def __rmul__(self, s):
+        return self*s
+
     def __neg__(self):
         return self*-1
 
@@ -56,4 +59,5 @@ if __name__ == '__main__':
     assert m.getDimensions() == (2,3), m.getDimensions()
     assert m == Matrix(a[:], 2, 3)
     assert m*2 == Matrix([2, 6, 4, 8, 10, 16], 2, 3), m*2
+    assert 2*m == Matrix([2, 6, 4, 8, 10, 16], 2, 3), 2*m
     assert -m == Matrix([-1, -3, -2, -4, -5, -8], 2, 3), -m
