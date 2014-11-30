@@ -1,6 +1,18 @@
 def multiple_submatrices(m1, i1, j1, m2, i2, j2, n, m, p):
     return Matrix(list(sum(m1(i1+i,j1+x)*m2(i2+x,j2+j) for x in range(m)) for i in range(n) for j in range(p)), n, p)
 
+
+def concatenate_matrices(m1, m2, m3, m4):
+    def generate_elements():
+        for i in range(m1.nRows+m3.nRows):
+            for j in range(m1.nCols+m2.nCols):
+                if i < m1.nRows:
+                    yield m1(i,j) if j < m1.nCols else m2(i,j-m1.nCols)
+                else:
+                    yield m3(i-m1.nRows,j) if j < m3.nCols else m4(i-m1.nRows,j-m3.nCols)
+    return Matrix(list(generate_elements()), m1.nRows+m3.nRows, m1.nCols+m2.nCols)
+
+
 class AbstractMatrix:
     def __init__(self, nRows, nCols):
         self.nRows = nRows
@@ -78,7 +90,7 @@ class Matrix(AbstractMatrix):
         return list(self.__a[i*self.nCols+j] for i in range(self.nRows))
 
     def __iter__(self):
-        return iter(a)
+        return iter(self.__a)
 
     def __call__(self, i, j):
         return self.__a[self.nCols*i + j]
@@ -105,3 +117,6 @@ if __name__ == '__main__':
     assert m1*m2 == m3, m1*m2
     assert multiple_submatrices(m1, 0, 1, m2, 1, 1, 2, 1, 3) == Matrix([3, 5], 2, 1)*Matrix([12, 14, 16], 1, 3)
     assert Submatrix(m1, 0, 1, 2, 1)*Submatrix(m2, 1, 1, 1, 3) == Matrix([3, 5], 2, 1)*Matrix([12, 14, 16], 1, 3)
+
+    c1 = Matrix([1, 2, 3, 4], 2, 2)
+    assert concatenate_matrices(c1, 10*c1, 100*c1, 1000*c1) == Matrix([1, 2, 10, 20, 3, 4, 30, 40, 100, 200, 1000, 2000, 300, 400, 3000, 4000], 4, 4)
