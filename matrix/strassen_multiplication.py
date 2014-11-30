@@ -16,12 +16,7 @@ def multiple(m1, m2):
 if __name__ == '__main__':
     m1 = Matrix([1, 2, 3, 4], 2, 2)
     m2 = Matrix([4, 3, 2, 1], 2, 2)
-    print m1
-    print
-    print m2
-    #print m1*m2
-    print
-    print multiple(m1, m2)
+    assert multiple(m1, m2) == m1*m2
 
 
 
