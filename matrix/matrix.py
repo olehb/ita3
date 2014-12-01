@@ -2,6 +2,9 @@ def multiple_submatrices(m1, i1, j1, m2, i2, j2, n, m, p):
     return Matrix([sum(m1(i1+i,j1+x)*m2(i2+x,j2+j) for x in range(m)) for i in range(n) for j in range(p)], n, p)
 
 
+def empty(nRows, nCols):
+    return Matrix([0 for i in range(nRows*nCols)], nRows, nCols)
+
 def concatenate_matrices(m1, m2, m3, m4):
     def generate_elements():
         for i in range(m1.nRows+m3.nRows):
