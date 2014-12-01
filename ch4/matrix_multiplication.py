@@ -14,4 +14,4 @@ if __name__ == '__main__':
     r = [p(multiplication.strassen, m1, m2), 
          p(multiplication.divide_and_conquer, m1, m2),
          p(multiplication.simple, m1, m2)]
-    print(r)
+    #print(r)
