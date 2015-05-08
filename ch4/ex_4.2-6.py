@@ -3,6 +3,7 @@ import random
 from matrix import matrix
 from matrix import multiplication
 
+
 def concatenate(matrices, nRows, nCols, n, m):
     for i in range(nRows):
         for k in range(n):
