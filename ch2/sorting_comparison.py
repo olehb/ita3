@@ -3,6 +3,9 @@ import benchmark.inputs
 import benchmark.profiler
 
 if __name__ == '__main__':
+    """
+    TODO: Explain what this code is doing
+    """
     a = benchmark.inputs.random_array(100000, 100, -100)
     p = benchmark.profiler.profile
     i = 0
